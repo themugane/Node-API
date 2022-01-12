@@ -12,7 +12,8 @@ module.exports = function UserRouter(userController) {
     router.get('/', (req, res, next) => {
         userController.getUsers()
         .then((users) => {
-            res.send(users);
+            res.render('index', {users: users});
+            // res.send(users);
         })
         .catch(next)
     });

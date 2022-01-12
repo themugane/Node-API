@@ -11,6 +11,7 @@ const config = require('./config/config.js');
 const UsersRouter = require('./routers/users.router.js');
 const app = express();
 app.use(cors());
+app.set('view engine', 'ejs');
 // Wrap this in a promise
 const listener = (expressApp, port) => {
     return new Promise((resolve, reject) => {
@@ -38,7 +39,7 @@ Promise.all([
     const usersService = new UsersService(initializedEntities[1]);
     const usersController = new UsersController(usersService);
     const usersRouter = new UsersRouter(usersController);
-    app.use('/users', usersRouter);
+    app.use('/', usersRouter);
     /**
     * If the middleware above this hasn't sent back a response, then there was no matching endpoint. We send back an HTTP 404.
     */
